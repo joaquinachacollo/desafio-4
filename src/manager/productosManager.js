@@ -1,6 +1,6 @@
 import fs from "fs";
 
-const path = "./files/productos.json";
+const path = "./src/files/productos.json";
 
 export default class ProductosManager {
   getProducts = async () => {
