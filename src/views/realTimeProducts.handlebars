@@ -1,4 +1,37 @@
-<h1>web socket</h1>
+<form>
+  <input placeholder="titulo" id="title" />
+  <br />
+  <br />
+  <input placeholder="descripcion" id="description" />
+  <br />
+  <br />
+  <input placeholder="precio" id="price" />
+  <br />
+  <br />
+  <input placeholder="thumbnail" id="thumbnail" />
+  <br />
+  <br />
+  <input placeholder="code" id="code" />
+  <br />
+  <br />
+  <input placeholder="stock" id="stock" />
+  <br />
+  <br />
+  <input placeholder="category" id="category" />
+  <br />
+  <br />
+</form>
+<button id="enviar">agregar producto</button>
+<br />
+<br />
+<form>
+  <input placeholder="eliminar" id="id" />
+  <br />
+</form>
+
+<button id="quitar">quitar producto</button>
+
+<div id="productos"></div>
 
 <script src="/socket.io/socket.io.js"></script>
 <script src="/js/index.js"></script>

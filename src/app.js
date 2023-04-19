@@ -4,9 +4,11 @@ import { Server } from "socket.io";
 import __dirname from "./utils.js";
 import viewRouter from "./routes/view.router.js";
 import realTimeProducts from "./routes/realTimeProducts.js";
+import ProductosManager from "./manager/productosManager.js";
 
 const PORT = 8080;
 const app = express();
+const manager = new ProductosManager();
 
 app.use(express.static(__dirname + "/public"));
 
@@ -24,9 +26,19 @@ const server = app.listen(PORT, () => {
 const socketServerIO = new Server(server);
 
 socketServerIO.on("connection", async (socket) => {
-  console.log("usuario conectado");
+  console.log("Usuario conectado");
+  const products = await manager.getProducts();
+  socketServerIO.emit("actualizado", products);
 
-  socket.on("enviar", (data) => {
-    socketServerIO.emit("log", data);
+  socket.on("message", async (nuevoProducto) => {
+    nuevoProducto = await manager.addProducts(nuevoProducto);
+
+    const productos = await manager.getProducts();
+    socketServerIO.emit("actualizado", productos);
+  });
+  socket.on("eliminar", async (id) => {
+    await manager.deleteProduct(id);
+    const productos = await manager.getProducts();
+    socketServerIO.emit("actualizado", productos);
   });
 });

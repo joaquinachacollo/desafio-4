@@ -89,7 +89,7 @@ export default class ProductosManager {
 
   deleteProduct = async (id_producto) => {
     const products = await this.getProducts();
-    const index = products.findIndex((products) => products.id === id_producto);
+    const index = products.findIndex((product) => product.id == id_producto);
 
     if (index !== -1) {
       const deletedProduct = products.splice(index, 1);
